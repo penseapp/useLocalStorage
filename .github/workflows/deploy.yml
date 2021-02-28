@@ -87,11 +87,11 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - id: release
-        name: Release tag
-        uses: rymndhng/release-on-push-action@master
-        with:
-          bump_version_scheme: patch
+      # - id: release
+      #   name: Release tag
+      #   uses: rymndhng/release-on-push-action@master
+      #   with:
+      #     bump_version_scheme: patch
 
       - name: Checkout Repo
         uses: actions/checkout@master
