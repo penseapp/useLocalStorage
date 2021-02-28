@@ -1,20 +1,19 @@
 # useLocalStorage
 
-<div align="center">
+<!-- <div align="center"> -->
 
 <!-- ![npm](https://img.shields.io/npm/dt/nodejs-health-checker?style=for-the-badge)<br> -->
 
 [![npm version](https://badge.fury.io/js/%40penseapp%2Fuselocalstorage.svg)](https://badge.fury.io/js/%40penseapp%2Fuselocalstorage)
 [![Tag Status](https://img.shields.io/github/tag/penseapp/uselocalstorage)](https://img.shields.io/github/v/tag/penseapp/uselocalstorage)
+[![License Status](https://img.shields.io/github/license/penseapp/uselocalstorage)](https://img.shields.io/github/license/penseapp/uselocalstorage)
+[![Issues Status](https://img.shields.io/github/issues/penseapp/uselocalstorage)](https://img.shields.io/github/issues/penseapp/uselocalstorage)
 
 <!-- ![test](https://github.com/penseapp/uselocalstorage/workflows/test/badge.svg?branch=master) -->
 <!-- ![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/@penseapp/uselocalstorage/test) -->
 <!-- [![Coverage Status](https://coveralls.io/repos/github/penseapp/uselocalstorage/badge.svg?branch=master)](https://coveralls.io/github/penseapp/uselocalstorage?branch=master) -->
 
-[![License Status](https://img.shields.io/github/license/penseapp/uselocalstorage)](https://img.shields.io/github/license/penseapp/uselocalstorage)
-[![Issues Status](https://img.shields.io/github/issues/penseapp/uselocalstorage)](https://img.shields.io/github/issues/penseapp/uselocalstorage)
-
-</div>
+<!-- </div> -->
 
 This is a react hook that allows you to use the power of browser localstorage
 and the useState react hook combined!
@@ -25,7 +24,7 @@ The API is the same, and you'll see no difference between them!
 
 ![Peek 2021-02-28 17-40](https://user-images.githubusercontent.com/5152197/109432913-444be780-79ec-11eb-87ad-bcc3d1204bb8.gif)
 
-You can this live version on: https://penseapp-uselocalstorage.web.app/
+You can try this live version on: https://penseapp-uselocalstorage.web.app/
 
 ## TL;DR
 
@@ -96,3 +95,22 @@ You have two options:
 
 - Set the time in seconds
 - Set false to infinite
+
+**Examples**
+
+```tsx
+// Never expires (infinite)
+const [state, setstate] = useLocalStorage<boolean>('keyName', 'defaultValue', false);
+
+
+// Expires in 1 minute
+const [state, setstate] = useLocalStorage<boolean>('keyName', 'defaultValue', 60);
+
+
+// Expires in 1 hour
+const [state, setstate] = useLocalStorage<boolean>('keyName', 'defaultValue', 60 * 60 * 1); // 3600 seconds
+
+
+// Expires in 12 hours
+const [state, setstate] = useLocalStorage<boolean>('keyName', 'defaultValue', 60 * 60 * 12); // 43200 seconds
+```
