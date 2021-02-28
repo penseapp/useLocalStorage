@@ -11,7 +11,7 @@
     "i-all": "npm i && cd playground && npm i",
     "build": "rollup -c",
     "build-watch": "rollup -c -w",
-    "build:all": "npm-run-all --parallel i-all build build:playground",
+    "build:all": "npm-run-all build build:playground",
     "start-playground": "cd playground && npm run start",
     "build:playground": "cd playground && npm run build",
     "install:playground": "cd playground && npm i-all",
