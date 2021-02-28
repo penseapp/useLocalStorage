@@ -30,7 +30,7 @@ jobs:
       #   run: yarn test
 
       - name: Build
-        run: yarn build
+        run: yarn build:all
 
       - name: Generate dist artifact for package
         uses: actions/upload-artifact@v2
@@ -135,11 +135,10 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
 
-      - name: Enter playground directory
-        run: cd playground
-
-      - name: Build
-        run: yarn build playground
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: playground-folder
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
