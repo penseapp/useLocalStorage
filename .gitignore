@@ -10,6 +10,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -34,6 +35,7 @@ yarn-error.log*
 
 # production
 /playground/build
+/playground/dist
 
 # misc
 /playground/.DS_Store
