@@ -52,6 +52,16 @@ label {
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   margin-left: 1em;
   margin-right: 1em;
+}
+
+caption {
+  font-size: small;
+  margin-top: 1em;
+}
+
+label.ignore {
+  margin-top: 0;
 }
