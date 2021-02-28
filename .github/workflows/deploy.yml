@@ -119,7 +119,7 @@ jobs:
 
   deploy-firebase:
     name: Deploy on Firebase
-    needs: [release-on-push]
+    needs: [publish]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
