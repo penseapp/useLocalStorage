@@ -2,16 +2,17 @@
 
 <div align="center">
 
-![npm](https://img.shields.io/npm/dt/nodejs-health-checker?style=for-the-badge)<br>
-[![npm version](https://badge.fury.io/js/nodejs-health-checker.svg)](https://badge.fury.io/js/nodejs-health-checker)
-![test](https://github.com/penseapp/uselocalstorage/workflows/test/badge.svg?branch=master)
-![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/penseapp/uselocalstorage/test)
-[![Coverage Status](https://coveralls.io/repos/github/penseapp/uselocalstorage/badge.svg?branch=master)](https://coveralls.io/github/penseapp/uselocalstorage?branch=master)
+<!-- ![npm](https://img.shields.io/npm/dt/nodejs-health-checker?style=for-the-badge)<br> -->
+
+[![npm version](https://badge.fury.io/js/%40penseapp%2Fuselocalstorage.svg)](https://badge.fury.io/js/%40penseapp%2Fuselocalstorage)
+[![Tag Status](https://img.shields.io/github/tag/penseapp/uselocalstorage)](https://img.shields.io/github/v/tag/penseapp/uselocalstorage)
+
+<!-- ![test](https://github.com/penseapp/uselocalstorage/workflows/test/badge.svg?branch=master) -->
+<!-- ![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/@penseapp/uselocalstorage/test) -->
+<!-- [![Coverage Status](https://coveralls.io/repos/github/penseapp/uselocalstorage/badge.svg?branch=master)](https://coveralls.io/github/penseapp/uselocalstorage?branch=master) -->
+
 [![License Status](https://img.shields.io/github/license/penseapp/uselocalstorage)](https://img.shields.io/github/license/penseapp/uselocalstorage)
 [![Issues Status](https://img.shields.io/github/issues/penseapp/uselocalstorage)](https://img.shields.io/github/issues/penseapp/uselocalstorage)
-[![Tag Status](https://img.shields.io/github/v/tag/penseapp/uselocalstorage)](https://img.shields.io/github/v/tag/penseapp/uselocalstorage)
-[![Languages Status](https://img.shields.io/github/languages/count/penseapp/uselocalstorage)](https://img.shields.io/github/languages/count/penseapp/uselocalstorage)
-[![Repo Size Status](https://img.shields.io/github/repo-size/penseapp/uselocalstorage)](https://img.shields.io/github/repo-size/penseapp/uselocalstorage)
 
 </div>
 

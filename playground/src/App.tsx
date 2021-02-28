@@ -5,8 +5,14 @@ import { useLocalStorage } from "./component-lib";
 const App: React.FC = () => {
   const [isDirty, setIsDirty] = useState<boolean>(false);
   const [useStateEx, setUseStateEx] = useState<string>("useState");
-  const [expireTime, setExpireTime] = useState<false | number>(60);
-  const [shouldExpire, setShouldExpire] = useState<boolean>(true);
+  const [expireTime, setExpireTime] = useLocalStorage<false | number>(
+    "expireTime",
+    60
+  );
+  const [shouldExpire, setShouldExpire] = useLocalStorage<boolean>(
+    "shouldExpire",
+    true
+  );
   const [useLocalStorageEx, setUseLocalStorageEx] = useLocalStorage<string>(
     "keyName",
     "useLocalStorage",
