@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Install Dependencies
-        run: yarn
+        run: npm run i-all
 
       - name: Check lint
         run: yarn lint
@@ -30,7 +30,7 @@ jobs:
       #   run: yarn test
 
       - name: Build
-        run: yarn build
+        run: npm run build:all
 
       - name: Generate dist artifact for package
         uses: actions/upload-artifact@v2
@@ -38,6 +38,15 @@ jobs:
           name: dist-folder
           path: dist/**/*
           if-no-files-found: error
+
+      - name: Archive playground Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: playground-artifact
+          path: |
+            playground/build
+            playground/firebase.json
+            playground/.firebaserc
 
       - name: Discord notification - finished build (Success)
         if: success()
@@ -71,6 +80,13 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag-prefix: ""
+
       - id: release
         name: Release tag
         uses: rymndhng/release-on-push-action@master
@@ -122,14 +138,10 @@ jobs:
     needs: [publish]
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-
-      - name: Install
-        run: npm run i-all
-
-      - name: Build
-        run: yarn build:playground
+      - name: Download Playground Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: playground-artifact
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
@@ -137,7 +149,6 @@ jobs:
           args: deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.USELOCALSTORAGE_FIREBASE_TOKEN }}
-          PROJECT_PATH: ./playground
 
       - name: Discord notification - deploy (success)
         if: success()
