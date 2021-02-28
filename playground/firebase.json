@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "playground/build",
+    "public": "build",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
