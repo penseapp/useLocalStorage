@@ -73,23 +73,13 @@ jobs:
       #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
 
   publish:
-    name: NPM package publish
-    needs:
-      - build
+    name: Generates new release and publish
+    needs: [build]
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: dist-folder
-          path: dist
-
-      - name: Publish on NPM
-        uses: mikeal/merge-release@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - uses: actions/checkout@v2
 
       - name: "Automated Version Bump"
@@ -99,42 +89,25 @@ jobs:
         with:
           tag-prefix: ""
 
-  # publish:
-  #   name: Generates new release and publish
-  #   needs: [build]
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #   if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-  #   steps:
-  #     - uses: actions/checkout@v2
+      - id: release
+        name: Release tag
+        uses: rymndhng/release-on-push-action@master
+        with:
+          bump_version_scheme: patch
 
-  #     - name: "Automated Version Bump"
-  #       uses: "phips28/gh-action-bump-version@master"
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         tag-prefix: ""
+      - uses: actions/checkout@v2
 
-  #     - id: release
-  #       name: Release tag
-  #       uses: rymndhng/release-on-push-action@master
-  #       with:
-  #         bump_version_scheme: patch
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist-folder
+          path: dist
 
-  #     - uses: actions/checkout@v2
-
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: dist-folder
-  #         path: dist
-
-  #     - name: Publish
-  #       uses: mikeal/merge-release@master
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-  #         DEPLOY_DIR: dist
+      - name: Publish
+        uses: mikeal/merge-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          DEPLOY_DIR: dist
 
   # - name: Notify discord
   #   if: success()
