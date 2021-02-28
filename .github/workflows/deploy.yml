@@ -132,7 +132,7 @@ jobs:
       #     severity: warn
       #     description: Github generated release cancelled
       #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
-: deploy-firebase:
+  deploy-firebase:
     name: Deploy on Firebase
     needs: [publish]
     runs-on: ubuntu-latest
