@@ -37,16 +37,16 @@ jobs:
         with:
           name: dist-folder
           path: dist/**/*
-          if-no-files-found: error
 
       - name: Archive playground Artifact
         uses: actions/upload-artifact@master
         with:
           name: playground-artifact
           path: |
-            playground/build
-            playground/firebase.json
-            playground/.firebaserc
+            ./playground/build
+            ./playground/firebase.json
+            ./playground/.firebaserc
+          if-no-files-found: error
 
       # - name: Discord notification - finished build (Success)
       #   if: success()
@@ -84,11 +84,19 @@ jobs:
         with:
           name: dist-folder
           path: dist
-      - name: Publish
+
+      - name: Publish on NPM
         uses: mikeal/merge-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Bump version on package.json
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag-prefix: ""
 
   # publish:
   #   name: Generates new release and publish
