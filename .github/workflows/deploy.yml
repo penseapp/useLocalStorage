@@ -73,67 +73,86 @@ jobs:
       #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
 
   publish:
-    name: Generates new release and publish
-    needs: [build]
+    name: NPM package publish
+    needs:
+      - build
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
-
-      - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@master"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag-prefix: ""
-
-      - id: release
-        name: Release tag
-        uses: rymndhng/release-on-push-action@master
-        with:
-          bump_version_scheme: patch
-
-      - uses: actions/checkout@v2
-
       - uses: actions/download-artifact@v2
         with:
           name: dist-folder
           path: dist
-
       - name: Publish
         uses: mikeal/merge-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # - name: Notify discord
-      #   if: success()
-      #   uses: rjstone/discord-webhook-notify@v1.0.4
-      #   with:
-      #     severity: success
-      #     description: Deploy finished - new release deployed
-      #     details: |
-      #       **- Tag name:** ${{ steps.release.outputs.tag_name }}
-      #       **- Release version:** ${{ steps.release.outputs.version }}
-      #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
+  # publish:
+  #   name: Generates new release and publish
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      # - name: Discord notification - Github generated release (error)
-      #   if: failure()
-      #   uses: rjstone/discord-webhook-notify@v1.0.4
-      #   with:
-      #     severity: error
-      #     description: Github generated release failed
-      #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
+  #     - name: "Automated Version Bump"
+  #       uses: "phips28/gh-action-bump-version@master"
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #       with:
+  #         tag-prefix: ""
 
-      # - name: Discord notification - Github generated release (cancelled)
-      #   if: cancelled()
-      #   uses: rjstone/discord-webhook-notify@v1.0.4
-      #   with:
-      #     severity: warn
-      #     description: Github generated release cancelled
-      #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
+  #     - id: release
+  #       name: Release tag
+  #       uses: rymndhng/release-on-push-action@master
+  #       with:
+  #         bump_version_scheme: patch
+
+  #     - uses: actions/checkout@v2
+
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: dist-folder
+  #         path: dist
+
+  #     - name: Publish
+  #       uses: mikeal/merge-release@master
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  #         DEPLOY_DIR: dist
+
+  # - name: Notify discord
+  #   if: success()
+  #   uses: rjstone/discord-webhook-notify@v1.0.4
+  #   with:
+  #     severity: success
+  #     description: Deploy finished - new release deployed
+  #     details: |
+  #       **- Tag name:** ${{ steps.release.outputs.tag_name }}
+  #       **- Release version:** ${{ steps.release.outputs.version }}
+  #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
+
+  # - name: Discord notification - Github generated release (error)
+  #   if: failure()
+  #   uses: rjstone/discord-webhook-notify@v1.0.4
+  #   with:
+  #     severity: error
+  #     description: Github generated release failed
+  #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
+
+  # - name: Discord notification - Github generated release (cancelled)
+  #   if: cancelled()
+  #   uses: rjstone/discord-webhook-notify@v1.0.4
+  #   with:
+  #     severity: warn
+  #     description: Github generated release cancelled
+  #     webhookUrl: ${{ secrets.DISCORD_CHANNEL_WEBHOOK }}
   deploy-firebase:
     name: Deploy on Firebase
     needs: [publish]
