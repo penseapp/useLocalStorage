@@ -101,8 +101,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - id: release on Github
-        name: Release tag
+      - name: release on Github
         uses: rymndhng/release-on-push-action@master
         with:
           bump_version_scheme: patch
