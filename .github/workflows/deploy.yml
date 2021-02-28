@@ -32,11 +32,21 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Generate dist artifact
+      - name: Generate dist artifact for package
         uses: actions/upload-artifact@v2
         with:
           name: dist-folder
           path: dist/**/*
+          if-no-files-found: error
+
+      - name: Generate dist artifact for firebase deploy playground
+        uses: actions/upload-artifact@v2
+        with:
+          name: playground-folder
+          path: |
+            ./playground/build
+            ./playground/firebase.json
+            ./playground/.firebaserc
           if-no-files-found: error
 
       - name: Discord notification - finished build (Success)
@@ -84,11 +94,11 @@ jobs:
           name: dist-folder
           path: dist
 
-      # - name: Publish
-      #   uses: mikeal/merge-release@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish
+        uses: mikeal/merge-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Notify discord
         if: success()

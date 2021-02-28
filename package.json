@@ -11,8 +11,10 @@
     "build": "rollup -c",
     "build-watch": "rollup -c -w",
     "start-playground": "cd playground && npm run start",
+    "build:playground": "cd playground && npm run build",
     "i-all": "npm i && cd playground && npm i",
-    "dev": "npm-run-all --parallel build-watch start-playground"
+    "dev": "npm-run-all --parallel build-watch start-playground",
+    "build-all": "npm-run-all --parallel i-all build build:playground"
   },
   "keywords": [
     "react",
@@ -50,9 +52,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "dependencies": {
     "expired-storage": "^1.0.2"
   },
