@@ -23,7 +23,9 @@ The API is the same, and you'll see no difference between them!
 
 ## Example live action
 
-You can check a live version of this application on: https://penseapp-uselocalstorage.web.app/
+![Peek 2021-02-28 17-40](https://user-images.githubusercontent.com/5152197/109432913-444be780-79ec-11eb-87ad-bcc3d1204bb8.gif)
+
+You can this live version on: https://penseapp-uselocalstorage.web.app/
 
 ## TL;DR
 
@@ -60,13 +62,13 @@ import { useLocalStorage } from "@penseapp/uselocalstorage";
 Simple change the `useState` to `useLocalStorage` on any hooks and it's done.
 Now you can reload your browser and your state will maintein
 
-```tsx
+```diff
 import React, { useState } from "react";
 import { useLocalStorage } from "@penseapp/uselocalstorage";
 
 const App: React.FC = () => {
 -  const [state, setstate] = useState<boolean>(false);
-+  const [state, setstate] = useLocalStorage<boolean>(false);
++  const [state, setstate] = useLocalStorage<boolean>('keyName', false);
 
   return (
     <>
