@@ -126,7 +126,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Install
-        run: yarn install:playground
+        run: npm run i-all
 
       - name: Build
         run: yarn build:playground
