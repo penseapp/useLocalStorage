@@ -30,23 +30,13 @@ jobs:
       #   run: yarn test
 
       - name: Build
-        run: yarn build:all
+        run: yarn build
 
       - name: Generate dist artifact for package
         uses: actions/upload-artifact@v2
         with:
           name: dist-folder
           path: dist/**/*
-          if-no-files-found: error
-
-      - name: Generate dist artifact for firebase deploy playground
-        uses: actions/upload-artifact@v2
-        with:
-          name: playground-folder
-          path: |
-            ./playground/build
-            ./playground/firebase.json
-            ./playground/.firebaserc
           if-no-files-found: error
 
       - name: Discord notification - finished build (Success)
@@ -135,10 +125,8 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@master
 
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: playground-folder
+      - name: Build
+        run: yarn build:playground
 
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
@@ -146,6 +134,7 @@ jobs:
           args: deploy
         env:
           FIREBASE_TOKEN: ${{ secrets.USELOCALSTORAGE_FIREBASE_TOKEN }}
+          PROJECT_PATH: ./playground
 
       - name: Discord notification - deploy (success)
         if: success()
