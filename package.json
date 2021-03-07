@@ -4,6 +4,10 @@
   "description": "A react hooks to use useState with localStorage persist",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penseapp/useLocalStorage.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "FORCE_COLOR=true eslint ./src/**/*.{ts,tsx} --max-warnings=0 --format=codeframe",
