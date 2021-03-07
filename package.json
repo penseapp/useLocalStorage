@@ -8,6 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/penseapp/useLocalStorage.git"
   },
+  "homepage": "https://penseapp-uselocalstoragereduce.web.app",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "FORCE_COLOR=true eslint ./src/**/*.{ts,tsx} --max-warnings=0 --format=codeframe",
@@ -66,7 +67,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "yarn lint",
+      "pre-push": "yarn && yarn build:all && yarn lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }

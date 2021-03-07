@@ -33,16 +33,36 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <>
-          <h4>
-            {isDirty ? (
-              <>You changed the useLocalStorageEx hook, reload the browser!</>
-            ) : (
-              <>Write text on the inputs below and reload the browser</>
-            )}
-          </h4>
-          <br />
-        </>
+        <img
+          src="/logo512.png"
+          alt="Penseapp logo"
+          width="250px"
+          height="auto"
+        />
+        <a
+          href="https://github.com/penseapp/useLocalStorage"
+          rel="noreferrer"
+          target="_blank"
+        >
+          <img
+            src="https://www.kindpng.com/picc/m/128-1280187_github-logo-png-github-transparent-png.png"
+            alt="Penseapp logo"
+            width="250px"
+            style={{ borderRadius: "8px" }}
+            height="auto"
+          />
+        </a>
+      </header>
+      <section className="App-body">
+        <h3>useLocalStorage hook</h3>
+        <h4>
+          {isDirty ? (
+            <>You changed the useLocalStorageEx hook, reload the browser!</>
+          ) : (
+            <>Write text on the inputs below and reload the browser</>
+          )}
+        </h4>
+        <br />
 
         <div className="row">
           <div className="container">
@@ -115,7 +135,7 @@ const App: React.FC = () => {
             </div>
           </div>
         </div>
-      </header>
+      </section>
     </div>
   );
 };
