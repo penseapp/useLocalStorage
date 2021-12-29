@@ -9,3 +9,4 @@
  */
 export declare function useLocalStorage<T>(key: string, initialValue: T, expire?: number | boolean): [T, (value: T) => void];
 export default useLocalStorage;
+//# sourceMappingURL=useLocalStorage.d.ts.map
