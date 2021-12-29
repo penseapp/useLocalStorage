@@ -2,8 +2,10 @@
   "name": "@penseapp/uselocalstorage",
   "version": "1.0.22",
   "description": "A react hooks to use useState with localStorage persist",
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/penseapp/useLocalStorage.git"
@@ -15,8 +17,9 @@
     "prettier": "FORCE_COLOR=true prettier --write './src/**/*.{jsx,tsx,ts,js,md}' && prettier --write './README.md'",
     "i-all": "npm i && cd playground && npm i",
     "build": "rollup -c",
+    "build:ts": "tsc",
     "build-watch": "rollup -c -w",
-    "build:all": "npm-run-all build build:playground",
+    "build:all": "npm-run-all build build:playground build:ts",
     "start-playground": "cd playground && npm run start",
     "build:playground": "cd playground && npm run build",
     "install:playground": "cd playground && npm i-all",
@@ -59,7 +62,7 @@
     "react-dom": "^17.0.1"
   },
   "files": [
-    "dist"
+    "dist/**/*"
   ],
   "dependencies": {
     "expired-storage": "^1.0.2"
