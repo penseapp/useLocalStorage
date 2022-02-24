@@ -1,6 +1,6 @@
 {
   "name": "@penseapp/uselocalstorage",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "A react hooks to use useState with localStorage persist",
   "main": "dist/index.js",
   "module": "dist/index.js",
