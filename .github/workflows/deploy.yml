@@ -43,7 +43,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: dist-folder
-          path: dist/**/*
+          path: |
+            dist/**/*
+            package.json
 
       - name: Archive playground Artifact
         uses: actions/upload-artifact@master
@@ -87,13 +89,10 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-
       - uses: actions/download-artifact@v2
         with:
           name: dist-folder
-          path: dist
+          path: "**/*"
 
       - name: Publish on NPM
         uses: mikeal/merge-release@master
