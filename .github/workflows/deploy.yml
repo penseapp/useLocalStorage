@@ -32,20 +32,11 @@ jobs:
       - name: Build
         run: npm run build:all
 
-      - name: "Automated Version Bump"
-        uses: "phips28/gh-action-bump-version@master"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          skip-tag: "true"
-
       - name: Generate dist artifact for package
         uses: actions/upload-artifact@v2
         with:
           name: dist-folder
-          path: |
-            dist/**/*
-            package.json
+          path: dist/**/*
 
       - name: Archive playground Artifact
         uses: actions/upload-artifact@master
@@ -89,10 +80,20 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+
       - uses: actions/download-artifact@v2
         with:
           name: dist-folder
-          path: "**/*"
+          path: dist
+
+      - name: "Automated Version Bump"
+        uses: "phips28/gh-action-bump-version@master"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          skip-tag: "true"
 
       - name: Publish on NPM
         uses: mikeal/merge-release@master
